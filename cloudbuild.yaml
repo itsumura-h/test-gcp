@@ -1,0 +1,3 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+args: ['build', '-t', 'gcr.io/test-gae-338806/test-gae', '--file', './docker/stg/Dockerfile', '.', -q]

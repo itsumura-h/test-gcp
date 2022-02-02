@@ -2,7 +2,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args:
     - 'build'
-    - '-tag'
+    - '--tag'
     - '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME:latest'
     - '--file'
     - './docker/stg/Dockerfile'

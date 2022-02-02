@@ -43,6 +43,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 8080
+EXPOSE ${PORT}
 
-CMD ["node_modules/.bin/next", "start", "-p", "8080"]
+CMD ["node_modules/.bin/next", "start", "-p", ${PORT}]

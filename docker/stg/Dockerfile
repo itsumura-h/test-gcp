@@ -45,4 +45,4 @@ RUN npm run build
 
 EXPOSE ${PORT}
 
-CMD ["node_modules/.bin/next", "start", "-p", ${PORT}]
+CMD ["node_modules/.bin/next", "start", "-p", "${PORT}"]

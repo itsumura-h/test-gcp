@@ -1,6 +1,8 @@
 image=test-gcp
+container-stg=`docker ps -a | grep "${image}" | awk '{print $$1}'`
+port=8080
 
 stg-test:
-	# docker build --tag=${image} --file="./docker/stg/Dockerfile" .
-	# docker run --detach --name="${image}" --publish=8080:8080 --tty ${image}
-	docker run --detach --name="${image}" --publish=8080:8080 --tty --rm ${image} $(docker build --tag=${image} --file="./docker/stg/Dockerfile" . -q)
+	docker rm -f $(container-stg) || :
+	docker build --tag ${image} --file "./docker/stg/Dockerfile" .
+	docker run --detach --env PORT=${port} --name "${image}" --publish "${port}:${port}" --tty ${image}

@@ -1,3 +1,9 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/test-gae-338806/test-gae', '--file', './docker/stg/Dockerfile', '.', -q]
+  args:
+    - 'build'
+    - '-t'
+    - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:latest'
+    - '--file'
+    - './docker/stg/Dockerfile'
+    - '.'

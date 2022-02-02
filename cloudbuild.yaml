@@ -3,7 +3,7 @@ steps:
   args:
     - 'build'
     - '-t'
-    - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:latest'
+    - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:latest'
     - '--file'
     - './docker/stg/Dockerfile'
     - '.'

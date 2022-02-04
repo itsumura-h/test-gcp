@@ -42,6 +42,7 @@ COPY . .
 # COPY --from=node_modules /modules/node_modules ./node_modules
 
 RUN npm run build
+RUN eco ${PORT}
 
 EXPOSE ${PORT}
 

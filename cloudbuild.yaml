@@ -12,7 +12,7 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME', '.']
+  args: ['build', '-t', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME', './docker/stg/Dockerfile', '.']
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME']

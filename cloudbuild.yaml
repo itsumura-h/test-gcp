@@ -1,24 +1,14 @@
-# steps:
-# - name: 'gcr.io/cloud-builders/docker'
-#   args:
-#     - 'build'
-#     - '--tag'
-#     - '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME:latest'
-#     - '--file'
-#     - './docker/stg/Dockerfile'
-#     - '.'
-
-
 steps:
-# Build the container image
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME', '--file', './docker/stg/Dockerfile', '.']
-# Push the container image to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME']
-# Deploy container image to Cloud Run
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'deploy', '$_SERVICE_NAME', '--image', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME', '--region', '$_DEPLOY_REGION']
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME', '--file', './docker/stg/Dockerfile', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    entrypoint: gcloud
+    args: ['run', 'deploy', '$_SERVICE_NAME', '--image', '$_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME', '--region', '$_DEPLOY_REGION']
+timeout: 3600s
 images:
 - $_GCR_HOSTNAME/$_PROJECT_ID/$_SERVICE_NAME
